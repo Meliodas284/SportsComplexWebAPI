@@ -10,11 +10,11 @@
         public int PassportSeries { get; set; }
         public int PassportNumber { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
-        public Section Section { get; set; }
+        public Section Section { get; set; } = new Section();
         public int SectionId { get; set; }
-        public List<ClientSeasonTicket> ClientSeasonTickets { get; set; }
-        public List<Group> Groups { get; set; }
-        public List<Training> Trainings { get; set; }
-        public List<CoachContact> CoachContacts { get; set; }
+        public List<ClientSeasonTicket> ClientSeasonTickets { get; set; } = new List<ClientSeasonTicket>();
+        public List<Group> Groups { get; set; } = new List<Group>();
+        public List<Training> Trainings { get; set; } = new List<Training>();
+        public List<CoachContact> CoachContacts { get; set; } = new List<CoachContact>();
     }
 }

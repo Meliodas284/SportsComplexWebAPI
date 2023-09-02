@@ -3,11 +3,9 @@
     public class ClientTraining
     {
         public int Id { get; set; }
-        public Training Training { get; set; }
+        public Training Training { get; set; } = new Training();
         public int TrainingId { get; set; }
-        public Client Client { get; set; }
-        public int ClientId { get; set; }
-        public ClientSeasonTicket ClientSeasonTicket { get; set; }
+        public ClientSeasonTicket ClientSeasonTicket { get; set; } = new ClientSeasonTicket();
         public int ClientSeasonTicketId { get; set; }
         public TrainingVisiting Visiting { get; set; } = TrainingVisiting.NotAttend;
 
