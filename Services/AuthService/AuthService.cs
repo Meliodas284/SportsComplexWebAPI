@@ -24,17 +24,16 @@ namespace SportsComplexWebAPI.Services.AuthenticationService
             var response = new ServiceResponse<string>();
             try
             {
-                var user = await _context.Administrators.FirstOrDefaultAsync
+                var user = await _context.Users.FirstOrDefaultAsync
                     (
-                        a => a.Username == request.Username && a.Password == request.Password
+                        u => u.Username == request.Username && u.Password == request.Password
                     );
-                if (user is not null)
-                {
-                    response.Data = CreateToken(user.Username, "Administrator");
-                    return response;
-                }
 
-                throw new Exception("Wrong username or password!");
+                if (user is null)
+                    throw new Exception("Wrong username or password!");
+
+                response.Data = CreateToken(user.Username, user.Role);
+                return response;
             }
             catch (Exception ex)
             {

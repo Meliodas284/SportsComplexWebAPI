@@ -21,5 +21,6 @@ namespace SportsComplexWebAPI.Data
         public DbSet<SeasonTicket> SeasonTickets => Set<SeasonTicket>();
         public DbSet<Section> Sections => Set<Section>();
         public DbSet<Training> Trainings => Set<Training>();
+        public DbSet<User> Users => Set<User>();
     }
 }

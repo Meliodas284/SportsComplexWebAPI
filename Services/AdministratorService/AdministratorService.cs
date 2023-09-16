@@ -98,8 +98,6 @@ namespace SportsComplexWebAPI.Services.AdministratorService
                 admin.Surname = request.Surname;
                 admin.PassportNumber = request.PassportNumber;
                 admin.PassportSeries = request.PassportSeries;
-                admin.Password = request.Password;
-                admin.Username = request.Username;
                 admin.PhoneNumber = request.PhoneNumber;
 
                 await _context.SaveChangesAsync();
@@ -120,7 +118,11 @@ namespace SportsComplexWebAPI.Services.AdministratorService
             var response = new ServiceResponse<GetAdminDto>();
             try
             {
+                var newUser = _mapper.Map<User>(request);
+                newUser.Role = "Administrator";
+                _context.Users.Add(newUser);
                 var newAdmin = _mapper.Map<Administrator>(request);
+                newAdmin.User = newUser;
                 _context.Administrators.Add(newAdmin);
                 await _context.SaveChangesAsync();
                 response.Data = _mapper.Map<GetAdminDto>(newAdmin);

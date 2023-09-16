@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsComplexWebAPI.Data;
 
@@ -11,9 +12,11 @@ using SportsComplexWebAPI.Data;
 namespace SportsComplexWebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230912114254_AddUserEntity")]
+    partial class AddUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,13 +66,7 @@ namespace SportsComplexWebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Administrators");
                 });
@@ -94,13 +91,7 @@ namespace SportsComplexWebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Clients");
                 });
@@ -207,15 +198,9 @@ namespace SportsComplexWebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SectionId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Coaches");
                 });
@@ -395,6 +380,9 @@ namespace SportsComplexWebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -421,28 +409,6 @@ namespace SportsComplexWebAPI.Migrations
                         .HasForeignKey("SectionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SportsComplexWebAPI.Models.Administrator", b =>
-                {
-                    b.HasOne("SportsComplexWebAPI.Models.User", "User")
-                        .WithOne("Administrator")
-                        .HasForeignKey("SportsComplexWebAPI.Models.Administrator", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SportsComplexWebAPI.Models.Client", b =>
-                {
-                    b.HasOne("SportsComplexWebAPI.Models.User", "User")
-                        .WithOne("Client")
-                        .HasForeignKey("SportsComplexWebAPI.Models.Client", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SportsComplexWebAPI.Models.ClientSeasonTicket", b =>
@@ -511,15 +477,7 @@ namespace SportsComplexWebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SportsComplexWebAPI.Models.User", "User")
-                        .WithOne("Coach")
-                        .HasForeignKey("SportsComplexWebAPI.Models.Coach", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Section");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SportsComplexWebAPI.Models.CoachContact", b =>
@@ -621,15 +579,6 @@ namespace SportsComplexWebAPI.Migrations
             modelBuilder.Entity("SportsComplexWebAPI.Models.Training", b =>
                 {
                     b.Navigation("ClientTrainings");
-                });
-
-            modelBuilder.Entity("SportsComplexWebAPI.Models.User", b =>
-                {
-                    b.Navigation("Administrator");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("Coach");
                 });
 #pragma warning restore 612, 618
         }

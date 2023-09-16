@@ -10,6 +10,7 @@ namespace SportsComplexWebAPI.AutoMapper
         {
             CreateMap<Administrator, GetAdminDto>();
             CreateMap<RegisterAdminDto, Administrator>();
+            CreateMap<RegisterAdminDto, User>();
         }
     }
 }
