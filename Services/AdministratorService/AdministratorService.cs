@@ -22,13 +22,16 @@ namespace SportsComplexWebAPI.Services.AdministratorService
             var response = new ServiceResponse<GetAdminDto>();
             try
             {
-                var admin = await _context.Administrators.FirstOrDefaultAsync(a => a.Id == id);
-                if (admin == null) 
-                {
+                var user = await _context.Users.Include(u => u.Administrator).FirstOrDefaultAsync
+                    (
+                        u => u.Administrator != null && u.Administrator.Id == id
+                    );
+
+                if (user is null)
                     throw new Exception("Administrator is not found");
-                }
-                response.Data = _mapper.Map<GetAdminDto>(admin);
-                _context.Administrators.Remove(admin);
+
+                response.Data = _mapper.Map<GetAdminDto>(user.Administrator);
+                _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
                 return response;
             }
@@ -69,10 +72,13 @@ namespace SportsComplexWebAPI.Services.AdministratorService
             var response = new ServiceResponse<GetAdminDto>();
             try
             {
-                var admin = await _context.Administrators.FirstOrDefaultAsync(a => a.Id == id);
-                if (admin is null)
-                    throw new Exception("Administrator is not found!");
-                response.Data = _mapper.Map<GetAdminDto>(admin);
+                var user = await _context.Users.Include(u => u.Administrator).FirstOrDefaultAsync
+                    (
+                        u => u.Administrator != null && u.Administrator.Id == id
+                    );
+                if (user is null)
+                    throw new Exception("Administrator is not found");
+                response.Data = _mapper.Map<GetAdminDto>(user.Administrator);
                 return response;
             }
             catch (Exception ex)
@@ -89,19 +95,22 @@ namespace SportsComplexWebAPI.Services.AdministratorService
             var response = new ServiceResponse<GetAdminDto>();
             try
             {
-                var admin = await _context.Administrators.FirstOrDefaultAsync(a => a.Id == request.Id);
-                if (admin is null)
+                var user = await _context.Users.Include(u => u.Administrator).FirstOrDefaultAsync
+                    (
+                        u => u.Administrator != null && u.Administrator.Id == request.Id
+                    );
+                if (user is null)
                 {
                     throw new Exception("Administrator is not found");
                 }
-                admin.Name = request.Name;
-                admin.Surname = request.Surname;
-                admin.PassportNumber = request.PassportNumber;
-                admin.PassportSeries = request.PassportSeries;
-                admin.PhoneNumber = request.PhoneNumber;
+                user.Administrator!.Name = request.Name;
+                user.Administrator.Surname = request.Surname;
+                user.Administrator.PassportNumber = request.PassportNumber;
+                user.Administrator.PassportSeries = request.PassportSeries;
+                user.Administrator.PhoneNumber = request.PhoneNumber;
 
                 await _context.SaveChangesAsync();
-                response.Data = _mapper.Map<GetAdminDto>(admin);
+                response.Data = _mapper.Map<GetAdminDto>(user.Administrator);
                 return response;
             }
             catch (Exception ex)
