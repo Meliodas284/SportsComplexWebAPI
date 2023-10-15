@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SportsComplexWebAPI.Data;
-using SportsComplexWebAPI.Services.AdministratorService;
-using SportsComplexWebAPI.Services.AuthenticationService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -46,8 +44,6 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddScoped<IAdministratorService, AdministratorService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
