@@ -5,22 +5,19 @@ namespace SportsComplexWebAPI.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DataContext(DbContextOptions options) : base(options)
         {
             
         }
 
-        public DbSet<Administrator> Administrators => Set<Administrator>();
-        public DbSet<Client> Clients => Set<Client>();
-        public DbSet<ClientSeasonTicket> ClientSeasonTickets => Set<ClientSeasonTicket>();
-        public DbSet<ClientTraining> ClientTrainings => Set<ClientTraining>();
-        public DbSet<Coach> Coaches => Set<Coach>();
-        public DbSet<CoachContact> CoachContacts => Set<CoachContact>();
-        public DbSet<Group> Groups => Set<Group>();
-        public DbSet<Gym> Gyms => Set<Gym>();
-        public DbSet<SeasonTicket> SeasonTickets => Set<SeasonTicket>();
-        public DbSet<Section> Sections => Set<Section>();
-        public DbSet<Training> Trainings => Set<Training>();
-        public DbSet<User> Users => Set<User>();
+        DbSet<User> Users { get; set; }
+        DbSet<Client> Clients { get; set; }
+        DbSet<Coach> Coaches { get; set; }
+        DbSet<Administrator> Administartors { get; set; }
+        DbSet<Section> Sections { get; set; }
+        DbSet<Gym> Gyms { get; set; }
+        DbSet<Group> Groups { get; set; }
+        DbSet<Subscription> Subscriptions { get; set; }
+        DbSet<PurchasedSubscription> PurchasedSubscriptions { get; set; }
     }
 }
