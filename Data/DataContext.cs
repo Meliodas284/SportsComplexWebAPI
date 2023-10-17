@@ -10,14 +10,14 @@ namespace SportsComplexWebAPI.Data
             
         }
 
-        DbSet<User> Users { get; set; }
-        DbSet<Client> Clients { get; set; }
-        DbSet<Coach> Coaches { get; set; }
-        DbSet<Administrator> Administartors { get; set; }
-        DbSet<Section> Sections { get; set; }
-        DbSet<Gym> Gyms { get; set; }
-        DbSet<Group> Groups { get; set; }
-        DbSet<Subscription> Subscriptions { get; set; }
-        DbSet<PurchasedSubscription> PurchasedSubscriptions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
+        public DbSet<Administrator> Administartors { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Gym> Gyms { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<PurchasedSubscription> PurchasedSubscriptions { get; set; }
     }
 }
