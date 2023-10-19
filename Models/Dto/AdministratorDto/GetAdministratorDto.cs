@@ -1,6 +1,6 @@
 ﻿namespace SportsComplexWebAPI.Models.Dto.AdministratorDto
 {
-    public class ReadAdministratorDto
+    public class GetAdministratorDto
     {
         public string Name { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;

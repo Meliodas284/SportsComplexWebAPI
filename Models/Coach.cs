@@ -11,6 +11,6 @@
         public int UserId { get; set; }
         public Section Section { get; set; }
         public int SectionId { get; set; }
-        public List<Group> Groups { get; set; }
+        public List<Group> Groups { get; set; } = new();
     }
 }

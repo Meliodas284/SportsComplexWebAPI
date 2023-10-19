@@ -8,7 +8,8 @@ namespace SportsComplexWebAPI.Mapping
     {
         public AdministratorProfile()
         {
-            CreateMap<ReadAdministratorDto, Administrator>();
+            CreateMap<RegisterAdministratorDto, Administrator>();
+            CreateMap<Administrator, GetAdministratorDto>();
         }
     }
 }

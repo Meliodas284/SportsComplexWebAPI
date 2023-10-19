@@ -9,6 +9,6 @@
         public string PhoneNumber { get; set; } = string.Empty;
         public User User { get; set; }
         public int UserId { get; set; }
-        public List<PurchasedSubscription> PurchasedSubscriptions { get; set; }
+        public List<PurchasedSubscription> PurchasedSubscriptions { get; set; } = new();
     }
 }

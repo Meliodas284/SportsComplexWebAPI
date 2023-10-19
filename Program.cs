@@ -4,6 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SportsComplexWebAPI.Data;
+using SportsComplexWebAPI.Repositories.AdministratorRepository;
+using SportsComplexWebAPI.Repositories.ClientRepository;
+using SportsComplexWebAPI.Repositories.CoachRepository;
+using SportsComplexWebAPI.Repositories.SectionRepository;
+using SportsComplexWebAPI.Services.AdministratorService;
+using SportsComplexWebAPI.Services.ClientService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -44,6 +50,12 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+builder.Services.AddScoped<IAdministratorService, AdministratorService>();
+builder.Services.AddScoped<ICoachRepository, CoachRepository>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 
 var app = builder.Build();
 
