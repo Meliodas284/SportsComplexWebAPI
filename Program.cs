@@ -8,7 +8,9 @@ using SportsComplexWebAPI.Repositories.AdministratorRepository;
 using SportsComplexWebAPI.Repositories.ClientRepository;
 using SportsComplexWebAPI.Repositories.CoachRepository;
 using SportsComplexWebAPI.Repositories.SectionRepository;
+using SportsComplexWebAPI.Repositories.UserRepository;
 using SportsComplexWebAPI.Services.AdministratorService;
+using SportsComplexWebAPI.Services.AuthService;
 using SportsComplexWebAPI.Services.ClientService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
@@ -56,6 +58,8 @@ builder.Services.AddScoped<IAdministratorRepository, AdministratorRepository>();
 builder.Services.AddScoped<IAdministratorService, AdministratorService>();
 builder.Services.AddScoped<ICoachRepository, CoachRepository>();
 builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SportsComplexWebAPI.Models;
 using SportsComplexWebAPI.Models.Dto.AdministratorDto;
@@ -19,6 +20,7 @@ namespace SportsComplexWebAPI.Controllers
         }
 
         [HttpPost("registration/administrator")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> RegisterAdmin(RegisterAdministratorDto request)
         {
             var response = await _service.RegisterAdmin(request);
@@ -28,6 +30,7 @@ namespace SportsComplexWebAPI.Controllers
         }
 
         [HttpPost("registration/coach")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<ResponseAPI<GetCoachDto>>> RegisterCoach(RegisterCoachDto request)
         {
             var response = await _service.RegisterCoach(request);
