@@ -16,7 +16,11 @@ namespace SportsComplexWebAPI.Repositories.UserRepository
 
         public async Task<User?> GetByNamePassword(string userName, string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Username == userName && u.Password == password);
+            return await _context.Users
+                .Include(u => u.Client)
+                .Include(u => u.Coach)
+                .Include(u => u.Administrator)
+                .FirstOrDefaultAsync(u => u.Username == userName && u.Password == password);
         }
     }
 }

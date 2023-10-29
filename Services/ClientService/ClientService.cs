@@ -22,7 +22,12 @@ namespace SportsComplexWebAPI.Services.ClientService
             try
             {
                 var client = _mapper.Map<Client>(request);
-                var user = new User { Username = request.Username, Password = request.Password, Role = "Client"};
+                var user = new User 
+                { 
+                    Username = request.Username, 
+                    Password = request.Password, 
+                    Role = "Client", 
+                };
                 client.User = user;
                 await _clientRepository.Create(client);
                 response.Data = _mapper.Map<GetClientDto>(client);

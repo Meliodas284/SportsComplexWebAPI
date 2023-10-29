@@ -20,12 +20,13 @@ namespace SportsComplexWebAPI.Services.AuthService
 
         }
 
-        public string CreateToken(User user)
+        public string CreateToken(User user, int id)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Role, user.Role),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!));
@@ -50,7 +51,16 @@ namespace SportsComplexWebAPI.Services.AuthService
                 var user = await _userRepository.GetByNamePassword(request.Username, request.Password);
                 if (user == null)
                     throw new Exception("Wrong username or password");
-                response.Data = CreateToken(user);
+                
+                int id = 0;
+                if (user.Client != null)
+                    id = user.Client.Id;
+                else if (user.Coach != null)
+                    id = user.Coach.Id;
+                else if (user.Administrator != null)
+                    id = user.Administrator.Id;
+
+                response.Data = CreateToken(user, id);
                 return response;
             }
             catch (Exception ex)
