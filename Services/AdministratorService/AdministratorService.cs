@@ -2,9 +2,11 @@
 using SportsComplexWebAPI.Models;
 using SportsComplexWebAPI.Models.Dto.AdministratorDto;
 using SportsComplexWebAPI.Models.Dto.CoachDto;
+using SportsComplexWebAPI.Models.Dto.Subscription;
 using SportsComplexWebAPI.Repositories.AdministratorRepository;
 using SportsComplexWebAPI.Repositories.CoachRepository;
 using SportsComplexWebAPI.Repositories.SectionRepository;
+using SportsComplexWebAPI.Repositories.SubscriptionRepository;
 using System.Data;
 
 namespace SportsComplexWebAPI.Services.AdministratorService
@@ -15,19 +17,59 @@ namespace SportsComplexWebAPI.Services.AdministratorService
         private readonly IAdministratorRepository _adminRepository;
         private readonly ICoachRepository _coachRepository;
         private readonly ISectionRepository _sectionRepositroy;
+        private readonly ISubscriptionRepository _subscriptionRepository;
 
         public AdministratorService
         (
             IMapper mapper, 
             IAdministratorRepository adminRepository, 
             ICoachRepository coachRepository,
-            ISectionRepository sectionRepository
+            ISectionRepository sectionRepository,
+            ISubscriptionRepository subscriptionRepository
         )
         {
             _mapper = mapper;
             _adminRepository = adminRepository;
             _coachRepository = coachRepository;
             _sectionRepositroy = sectionRepository;
+            _subscriptionRepository = subscriptionRepository;
+        }
+
+        public async Task<ResponseAPI<GetSubscriptionDto>> CreateSubscription(CreateSubscriptionDto request)
+        {
+            var response = new ResponseAPI<GetSubscriptionDto>();
+            try
+            {
+                var subscription = _mapper.Map<Subscription>(request);
+                await _subscriptionRepository.Create(subscription);
+                response.Data = _mapper.Map<GetSubscriptionDto>(subscription);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Data = null;
+                response.Success = false;
+                response.Message = ex.Message;
+                return response;
+            }
+        }
+
+        public async Task<ResponseAPI<List<GetSubscriptionDto>>> GetAllSubscriptions()
+        {
+            var response = new ResponseAPI<List<GetSubscriptionDto>>();
+            try
+            {
+                var subscriptionList = await _subscriptionRepository.GetAll();
+                response.Data = subscriptionList.Select(s => _mapper.Map<GetSubscriptionDto>(s)).ToList();
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Data = null;
+                response.Success = false;
+                response.Message = ex.Message;
+                return response;
+            }
         }
 
         public async Task<ResponseAPI<GetAdministratorDto>> RegisterAdmin(RegisterAdministratorDto request)

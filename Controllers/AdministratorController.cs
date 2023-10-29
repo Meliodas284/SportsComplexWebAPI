@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SportsComplexWebAPI.Models;
 using SportsComplexWebAPI.Models.Dto.AdministratorDto;
 using SportsComplexWebAPI.Models.Dto.CoachDto;
+using SportsComplexWebAPI.Models.Dto.Subscription;
 using SportsComplexWebAPI.Services.AdministratorService;
 
 namespace SportsComplexWebAPI.Controllers
@@ -34,6 +35,26 @@ namespace SportsComplexWebAPI.Controllers
         public async Task<ActionResult<ResponseAPI<GetCoachDto>>> RegisterCoach(RegisterCoachDto request)
         {
             var response = await _service.RegisterCoach(request);
+            if (response.Data == null)
+                return BadRequest(response);
+            return Ok(response);
+        }
+
+        [HttpGet("subscription")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<ResponseAPI<List<GetSubscriptionDto>>>> GetAllSubscriptions()
+        {
+            var response = await _service.GetAllSubscriptions();
+            if (response.Data == null)
+                return BadRequest(response);
+            return Ok(response);
+        }
+        
+        [HttpPost("subscription")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<ResponseAPI<GetSubscriptionDto>>> CreateSubscription(CreateSubscriptionDto request)
+        {
+            var response = await _service.CreateSubscription(request);
             if (response.Data == null)
                 return BadRequest(response);
             return Ok(response);
