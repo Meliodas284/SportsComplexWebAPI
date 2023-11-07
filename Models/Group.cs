@@ -1,4 +1,6 @@
-﻿namespace SportsComplexWebAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace SportsComplexWebAPI.Models
 {
     public class Group
     {

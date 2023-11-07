@@ -7,6 +7,7 @@ using SportsComplexWebAPI.Data;
 using SportsComplexWebAPI.Repositories.AdministratorRepository;
 using SportsComplexWebAPI.Repositories.ClientRepository;
 using SportsComplexWebAPI.Repositories.CoachRepository;
+using SportsComplexWebAPI.Repositories.PurchasedSubscriptionRepository;
 using SportsComplexWebAPI.Repositories.SectionRepository;
 using SportsComplexWebAPI.Repositories.SubscriptionRepository;
 using SportsComplexWebAPI.Repositories.UserRepository;
@@ -62,6 +63,8 @@ builder.Services.AddScoped<ISectionRepository, SectionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+builder.Services.AddScoped<IPurchasedSubscriptionRepository, PurchasedSubscriptionRepository>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

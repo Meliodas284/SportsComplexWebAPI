@@ -20,7 +20,7 @@ namespace SportsComplexWebAPI.Controllers
             _service = service;
         }
 
-        [HttpPost("registration/administrator")]
+        [HttpPost("register/administrator")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> RegisterAdmin(RegisterAdministratorDto request)
         {
@@ -30,7 +30,7 @@ namespace SportsComplexWebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("registration/coach")]
+        [HttpPost("register/coach")]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<ResponseAPI<GetCoachDto>>> RegisterCoach(RegisterCoachDto request)
         {
