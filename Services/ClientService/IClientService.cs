@@ -8,5 +8,6 @@ namespace SportsComplexWebAPI.Services.ClientService
     {
         public Task<ResponseAPI<GetClientDto>> Register(RegisterClientDto request);
         public Task<ResponseAPI<GetPurchasedSubscriptionDto>> BuySubscription(BuySubscriptionDto request);
+        public Task<ResponseAPI<List<GetPurchasedSubscriptionDto>>> GetAllSubscriptons();
     }
 }

@@ -7,7 +7,7 @@ namespace SportsComplexWebAPI.Models.Dto.PurchasedSubscriptionDto
 	{
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
-		public GetSubscriptionDto OunSubscription { get; set; } = new();
-		public GetGroupDto OunGroup { get; set; } = new();
+		public GetSubscriptionDto Subscription { get; set; }
+		public GetGroupDto Group { get; set; }
 	}
 }

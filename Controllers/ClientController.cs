@@ -37,5 +37,15 @@ namespace SportsComplexWebAPI.Controllers
                 return BadRequest(response);
             return Ok(response);
         }
-    }
+
+		[HttpGet("subscription")]
+		[Authorize(Roles = "Client")]
+        public async Task<ActionResult<ResponseAPI<List<GetPurchasedSubscriptionDto>>>> GetAllSubscriptions()
+        {
+            var response = await _service.GetAllSubscriptons();
+            if (response.Data == null)
+                return NotFound(response);
+            return Ok(response);
+        }
+	}
 }

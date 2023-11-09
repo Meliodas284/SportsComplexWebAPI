@@ -9,7 +9,9 @@ namespace SportsComplexWebAPI.Mapping
         public PurchasedSubscriptionProfile()
         {
             CreateMap<BuySubscriptionDto, PurchasedSubscription>();
-            CreateMap<PurchasedSubscription, GetPurchasedSubscriptionDto>();
+            CreateMap<PurchasedSubscription, GetPurchasedSubscriptionDto>()
+                .ForMember(dest => dest.Subscription, opt => opt.MapFrom(src => src.Subscription))
+                .ForMember(dest => dest.Group, opt => opt.MapFrom(src => src.Group));
         }
     }
 }

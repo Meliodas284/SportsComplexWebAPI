@@ -1,4 +1,5 @@
-﻿using SportsComplexWebAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SportsComplexWebAPI.Data;
 using SportsComplexWebAPI.Models;
 
 namespace SportsComplexWebAPI.Repositories.PurchasedSubscriptionRepository
@@ -17,6 +18,16 @@ namespace SportsComplexWebAPI.Repositories.PurchasedSubscriptionRepository
 			_context.PurchasedSubscriptions.Add(request);
 			await _context.SaveChangesAsync();
 			return request;
+		}
+
+		public async Task<List<PurchasedSubscription>> GetAllClientSub(int id)
+		{
+			return await _context.PurchasedSubscriptions
+				.Include(p => p.Client)
+				.Include(p => p.Group)
+				.Include(p => p.Group.Coach)
+				.Include(p => p.Subscription)
+				.Where(p => p.ClientId == id).ToListAsync();
 		}
 	}
 }

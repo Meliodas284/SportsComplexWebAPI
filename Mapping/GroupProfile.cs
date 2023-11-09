@@ -8,7 +8,8 @@ namespace SportsComplexWebAPI.Mapping
 	{
         public GroupProfile()
         {
-            CreateMap<Group, GetGroupDto>();
+            CreateMap<Group, GetGroupDto>()
+                .ForMember(dest => dest.Coach, opt => opt.MapFrom(src => src.Coach));
         }
     }
 }
