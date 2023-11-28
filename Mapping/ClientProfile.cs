@@ -8,8 +8,8 @@ namespace SportsComplexWebAPI.Mapping
     {
         public ClientProfile()
         {
-            CreateMap<RegisterClientDto, Client>();
-            CreateMap<Client, GetClientDto>();
+			CreateMap<Client, GetClientDto>();
+			CreateMap<RegisterClientDto, Client>();
         }
     }
 }
