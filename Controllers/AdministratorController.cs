@@ -13,51 +13,56 @@ namespace SportsComplexWebAPI.Controllers
     [ApiController]
     public class AdministratorController : ControllerBase
     {
-        private readonly IAdministratorService _service;
+        private readonly IAdministratorService _adminService;
 
-        public AdministratorController(IAdministratorService service)
+        public AdministratorController(IAdministratorService adminService)
         {
-            _service = service;
-        }
-
-        [HttpPost("register/administrator")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> RegisterAdmin(RegisterAdministratorDto request)
-        {
-            var response = await _service.RegisterAdmin(request);
-            if (response.Data == null)
-                return BadRequest(response);
-            return Ok(response);
+            _adminService = adminService;
         }
 
-        [HttpPost("register/coach")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ResponseAPI<GetCoachDto>>> RegisterCoach(RegisterCoachDto request)
+        [HttpGet]
+        public async Task<ActionResult<ResponseAPI<List<GetAdministratorDto>>>> GetAll()
         {
-            var response = await _service.RegisterCoach(request);
+            var response = await _adminService.GetAll();
             if (response.Data == null)
-                return BadRequest(response);
-            return Ok(response);
+                return NotFound(response);
+            return response;
         }
 
-        [HttpGet("subscription")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ResponseAPI<List<GetSubscriptionDto>>>> GetAllSubscriptions()
-        {
-            var response = await _service.GetAllSubscriptions();
-            if (response.Data == null)
-                return BadRequest(response);
-            return Ok(response);
-        }
-        
-        [HttpPost("subscription")]
-        [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<ResponseAPI<GetSubscriptionDto>>> CreateSubscription(CreateSubscriptionDto request)
-        {
-            var response = await _service.CreateSubscription(request);
-            if (response.Data == null)
-                return BadRequest(response);
-            return Ok(response);
-        }
-    }
+		[HttpGet("{id}")]
+		public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> Get(int id)
+		{
+			var response = await _adminService.Get(id);
+			if (response.Data == null)
+				return NotFound(response);
+			return response;
+		}
+
+		[HttpPost]
+		public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> Register(RegisterAdministratorDto request)
+		{
+			var response = await _adminService.Register(request);
+			if (response.Data == null)
+				return BadRequest(response);
+			return response;
+		}
+
+		[HttpPut]
+		public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> Update(UpdateAdministratorDto request)
+		{
+			var response = await _adminService.Update(request);
+			if (response.Data == null)
+				return NotFound(response);
+			return response;
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult<ResponseAPI<GetAdministratorDto>>> Delete(int id)
+		{
+			var response = await _adminService.Delete(id);
+			if (response.Data == null)
+				return NotFound(response);
+			return response;
+		}
+	}
 }
