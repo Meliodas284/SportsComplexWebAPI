@@ -8,8 +8,8 @@ namespace SportsComplexWebAPI.Mapping
     {
         public CoachProfile()
         {
-            CreateMap<RegisterCoachDto, Coach>();
-            CreateMap<Coach, GetCoachDto>();
+			CreateMap<Coach, GetCoachDto>();
+			CreateMap<RegisterCoachDto, Coach>();
         }
     }
 }

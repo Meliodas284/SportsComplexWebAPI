@@ -15,6 +15,7 @@ using SportsComplexWebAPI.Repositories.UserRepository;
 using SportsComplexWebAPI.Services.AdministratorService;
 using SportsComplexWebAPI.Services.AuthService;
 using SportsComplexWebAPI.Services.ClientService;
+using SportsComplexWebAPI.Services.CoachService;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -67,6 +68,7 @@ builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 builder.Services.AddScoped<IPurchasedSubscriptionRepository, PurchasedSubscriptionRepository>();
 builder.Services.AddScoped<IGroupRepository, GroupRepository>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICoachService, CoachService>();
 
 var app = builder.Build();
 

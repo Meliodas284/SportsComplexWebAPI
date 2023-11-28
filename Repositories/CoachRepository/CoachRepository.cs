@@ -33,15 +33,15 @@ namespace SportsComplexWebAPI.Repositories.CoachRepository
 
         public async Task<List<Coach>> GetAll()
         {
-            return await _context.Coaches.ToListAsync();
+            return await _context.Coaches.Include(c => c.Section).ToListAsync();
         }
 
         public async Task<Coach?> GetById(int id)
         {
-            return await _context.Coaches.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Coaches.Include(c => c.Section).FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<Coach?> Update(UpdateCoachDto request)
+		public async Task<Coach?> Update(UpdateCoachDto request)
         {
             var coach = await GetById(request.Id);
             if (coach == null)

@@ -8,6 +8,6 @@
         public string Surname { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
-        public string SectionName { get; set; } = string.Empty;
+        public int SectionId { get; set; }
     }
 }

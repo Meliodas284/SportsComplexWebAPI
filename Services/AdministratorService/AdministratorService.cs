@@ -103,7 +103,7 @@ namespace SportsComplexWebAPI.Services.AdministratorService
             var response = new ResponseAPI<GetCoachDto>();
             try
             {
-                var section = await _sectionRepositroy.GetByName(request.SectionName);
+                var section = await _sectionRepositroy.GetById(request.SectionId);
                 if (section == null)
                     throw new Exception("There is no section with the given name");
 
